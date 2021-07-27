@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import FormInput from "../../Resulable_components/FormInput/FormInput";
 import CustomButton from "../../Resulable_components/CustomButton/CustomButton";
 
-
+import {signInWithGoogle} from "../../Firebase/FireBase"
 import "./SignIn.scss"
 
 class SignIn extends Component {
@@ -37,7 +37,7 @@ class SignIn extends Component {
             label="Email"
             handleChange={this.handleChange}
             value={this.state.email}
-            required
+           
           />
           <FormInput
             name="password"
@@ -45,10 +45,15 @@ class SignIn extends Component {
             label="Password"
             handleChange={this.handleChange}
             value={this.state.password}
-            required
+            
           />
-
+          <div className="button">
           <CustomButton children="SIGN IN" type="submit" value="SubmitForm"/>
+          <CustomButton children="SIGN IN WITH GOOGLE" isGoogle onClick={signInWithGoogle}/>
+
+
+          </div>
+
         </form>
       </div>
     );
