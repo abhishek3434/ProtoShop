@@ -12,15 +12,52 @@ const config={
     measurementId: "G-BR15R23W93"
 }
 
+export const createUserDoc=async(auth,extra_data)=>{
+    if(!auth)return;
+
+   const userRef=firestore.doc(`user/${auth.uid}`);
+   const snapshot=await userRef.get();
+
+   
+
+   if(!snapshot.exists){
+       const{displayName,email}=auth;
+       const createAt=new Date();
+       try{
+           await userRef.set({
+               displayName,
+               email,
+               createAt,
+               ...extra_data
+           })
+       }
+       catch(error){
+           console.log("error creating user",error.message);
+
+       }
+   }
+   return userRef;
+}
+
+
+
+
+
 firebase.initializeApp(config)
+
+
 
 export const auth=firebase.auth();
 export const firestore= firebase.firestore();
+
+
 
 const provider= new firebase.auth.GoogleAuthProvider();
 
 provider.setCustomParameters({promt:"select_account"});
 
 export const signInWithGoogle=()=>auth.signInWithPopup(provider);
+
+
 
 export default firebase;

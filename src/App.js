@@ -7,7 +7,7 @@ import LoginSignup from "./components/Login_Signup/Login_Signup";
 
 import {Route,Switch} from 'react-router-dom';
 import './App.css';
-import {auth} from './Firebase/FireBase'
+import {auth,createUserDoc} from './Firebase/FireBase'
 
 class App extends Component {
   constructor(){
@@ -16,11 +16,27 @@ class App extends Component {
       user:null
     }
   }
+  
   unsubscribeFromAuth=null;
+
 componentDidMount(){
-   this.unsubscribeFromAuth=auth.onAuthStateChanged(user=>{
-    this.setState({user});
-    console.log(user);
+   this.unsubscribeFromAuth=auth.onAuthStateChanged( async user=>{
+    if(user){
+       const ref=await createUserDoc(user);
+     
+    ref.onSnapshot(snapShot=>{
+      this.setState({
+        user:{
+          id:snapShot.id,
+          ...snapShot.data()
+        }
+      });
+      console.log(this.state);
+    });
+  }
+  this.setState({user})
+  console.log(this.state.user)
+
   })
   
 }
