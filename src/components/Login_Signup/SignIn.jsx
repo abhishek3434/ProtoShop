@@ -24,7 +24,7 @@ class SignIn extends Component {
 
     }
     catch(error){
-      console.log(error);
+ 
 
     }
   };

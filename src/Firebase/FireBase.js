@@ -32,8 +32,7 @@ export const createUserDoc=async(auth,extra_data)=>{
            })
        }
        catch(error){
-           console.log("error creating user",error.message);
-
+          
        }
    }
    return userRef;
