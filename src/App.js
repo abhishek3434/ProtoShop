@@ -7,7 +7,7 @@ import Header from "./Resulable_components/Header/Header"
 import LoginSignup from "./components/Login_Signup/Login_Signup";
 import {setCurrentUser} from './redux/user/user-action'
 
-import {Route,Switch} from 'react-router-dom';
+import {Route,Switch,Redirect} from 'react-router-dom';
 import {auth,createUserDoc} from './Firebase/FireBase'
 import './App.css';
 
@@ -46,7 +46,7 @@ componentWillUnmount(){
         <Switch>
         <Route exact path="/" component={HomePage}/>
         <Route path="/shop" component={Shop}/>
-        <Route path="/signin" component={LoginSignup} />
+        <Route exact path="/signin"  render={()=>(this.props.currentUser?<Redirect to="/" />:<LoginSignup/>)} />
         </Switch>
       
       </div>
@@ -54,8 +54,12 @@ componentWillUnmount(){
   }
 }
 
+const mapStateToProps=({user})=>({
+  currentUser:user.user
+})
+
 const mapDispatchToProps=dispatch=>({
   setCurrentUser:user=>dispatch(setCurrentUser(user))
 })
  
-export default  connect(null, mapDispatchToProps)(App);
+export default  connect(mapStateToProps, mapDispatchToProps)(App);
