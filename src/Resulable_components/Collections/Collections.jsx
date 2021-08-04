@@ -12,10 +12,8 @@ const Collections = ({ title, items }) => {
           .map((item) => (
             <CollectionMenu
               key={item.id}
-              id={item.id}
-              name={item.name}
-              imageUrl={item.imageUrl}
-              price={item.price}
+              items={item}
+              
             />
           ))}
       </div>

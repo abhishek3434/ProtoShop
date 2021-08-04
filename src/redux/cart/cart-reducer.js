@@ -1,6 +1,9 @@
 import { CartType } from "./cart-types";
+import { addItemsToCart } from "./cart-utils";
+
 const Initial_state = {
   show: false,
+  collections:[]
 };
 
 const cartReducer = (state = Initial_state, action) => {
@@ -10,6 +13,11 @@ const cartReducer = (state = Initial_state, action) => {
         ...state,
         show: !state.show,
       };
+    case CartType.ADD_TO_CART:
+      return{
+        ...state,
+        collections:addItemsToCart(state.collections,action.payload)
+      }
     default:
       return state;
   }
