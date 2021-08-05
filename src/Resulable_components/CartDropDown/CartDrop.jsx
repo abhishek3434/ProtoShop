@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
+import { selectCartItems } from "../../redux/cart/cart-selector";
 
 import CartItem from "../CartItem/CartItem";
 
@@ -21,6 +22,6 @@ const CartDrop = ({cartItem}) => {
 };
 
 const mapStateToProps=(state)=>({
-  cartItem:state.cart.collections
+  cartItem:selectCartItems(state)
 })
 export default connect(mapStateToProps)(CartDrop);

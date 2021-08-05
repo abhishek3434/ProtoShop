@@ -1,20 +1,25 @@
-import React from 'react';
-import { ReactComponent as Cart} from '../../assets/cart.svg';
-import './CartIcon.scss'
+import React from "react";
+import { ReactComponent as Cart } from "../../assets/cart.svg";
+
+import "./CartIcon.scss";
 import { connect } from "react-redux";
 import { showCart } from "../../redux/cart/cart-action";
 
+import { selectCartCount } from "../../redux/cart/cart-selector";
 
-const CartIcon = ({showHidden}) => {
-    return (  
-        <div className="cart-icon" onClick={showHidden}>
-            <Cart className="shopping-icon"/>
-            <span className='item-count'>0</span>
-        </div>
-    );
-}
+const CartIcon = ({ showHidden,count}) => {
+  return (
+    <div className="cart-icon" onClick={showHidden}>
+      <Cart className="shopping-icon" />
+      <span className="item-count">{count}</span>
+    </div>
+  );
+};
 const mapDispatchToProps = (dispatch) => ({
-    showHidden: () => dispatch(showCart()),
-  });
-  
-export default connect(null, mapDispatchToProps)(CartIcon);
+  showHidden: () => dispatch(showCart()),
+});
+
+const mapStateToProps = (state) => ({
+  count: selectCartCount(state)
+})
+export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);
