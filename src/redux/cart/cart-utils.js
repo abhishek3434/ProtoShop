@@ -11,3 +11,14 @@ export const addItemsToCart = (previousState, newItem) => {
   return [...previousState,{...newItem,quantity:1}]
 
 };
+
+export const deleteItems=(state,itemRem)=>{
+  const existingItem=state.find(item=>item.id===itemRem.id);
+
+  if(existingItem.quantity===1){
+    return state.filter(item=>item.id!==itemRem.id);
+  }
+  return state.map(
+    item=>item.id===itemRem.id? {...item,quantity:item.quantity-1}:item
+  )
+};
