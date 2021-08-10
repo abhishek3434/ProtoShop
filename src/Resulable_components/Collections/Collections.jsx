@@ -12,8 +12,7 @@ const Collections = ({ title, items }) => {
           .map((item) => (
             <CollectionMenu
               key={item.id}
-              items={item}
-              
+              items={item} 
             />
           ))}
       </div>

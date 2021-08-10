@@ -7,6 +7,8 @@ import Header from "./Resulable_components/Header/Header";
 import LoginSignup from "./components/Login_Signup/Login_Signup";
 import CheckOut from "./components/CheckOut/CheckOut";
 
+
+
 import { setCurrentUser } from "./redux/user/user-action";
 import { selectCurrentUser } from "./redux/user/user-selector";
 import { createStructuredSelector } from "reselect";
@@ -14,6 +16,7 @@ import { createStructuredSelector } from "reselect";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { auth, createUserDoc } from "./Firebase/FireBase";
 import "./App.css";
+
 
 class App extends Component {
   unsubscribeFromAuth = null;
@@ -44,7 +47,8 @@ class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={Shop} />
+          <Route  path="/shop" component={Shop} />
+          <Route exact path="/checkout" component={CheckOut} />
           <Route
             exact
             path="/signin"
@@ -52,7 +56,8 @@ class App extends Component {
               this.props.currentUser ? <Redirect to="/" /> : <LoginSignup />
             }
           />
-          <Route exact path="/checkout" component={CheckOut} />
+          
+          <Redirect to='/'/>
         </Switch>
       </div>
     );
