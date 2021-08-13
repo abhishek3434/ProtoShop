@@ -1,7 +1,9 @@
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 
-const StripeCheckoutButton = ({price}) => {
+
+
+const StripeCheckoutButton = ({price,user}) => {
     const totalPrice=price*100;
     const publishedKey="pk_test_51JMwygSFDPp2JC0HnZz8i9nYTKly88L9hFlFDCTuOaahIRAQDLtfqz0aD3McebKDvATByNjvZnOFH7XhBCPtiTvC00AQKci8bg";
 
@@ -24,5 +26,7 @@ const StripeCheckoutButton = ({price}) => {
 
      );
 }
+
+
  
-export default StripeCheckoutButton;
+export default  (StripeCheckoutButton);
